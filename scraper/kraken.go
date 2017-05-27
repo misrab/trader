@@ -93,6 +93,15 @@ func (api *KrakenApi) Ticker(pairs ...string) (*TickerResponse, error) {
 }
 
 
+// convenience wrapper for ticker XETHZUSD only
+func (api *KrakenApi) TickerXETHZUSD() (*PairTickerInfo, error) {
+  t, err := api.Ticker("XETHZUSD")
+  if err != nil { return nil, err }
+
+  return &t.XETHZUSD, nil
+}
+
+
 // Query sends a query to Kraken api for given method and parameters
 func (api *KrakenApi) Query(method string, data map[string]string) (interface{}, error) {
 	values := url.Values{}
